@@ -8,32 +8,26 @@
         <label>Nome</label>
         <input type="text" pInputText name="nome" ngModel
           #nome="ngModel" required minlength="5">
-        <!--
-          <app-message [control]="nome" error="required"
-            text="Informe um nome"></app-message>
-          <app-message [control]="nome" error="minlength"
-            text="Minimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
-        -->
+        <app-message [control]="nome" error="required"
+          text="Informe um nome"></app-message>
+        <app-message [control]="nome" error="minlength"
+          text="Minimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Logradouro</label>
         <input type="text" pInputText name="logradouro" ngModel
           #logradouro="ngModel" required minlength="5">
-        <!--
-          <app-message [control]="logradouro" error="required"
-            text="Informe um logradouro"></app-message>
-          <app-message [control]="logradouro" error="minlength"
-            text="Minimo de {{ logradouro.errors?.minlength?.requiredLength }} caracteres"></app-message>
-        -->
+        <app-message [control]="logradouro" error="required"
+          text="Informe um logradouro"></app-message>
+        <app-message [control]="logradouro" error="minlength"
+          text="Minimo de {{ logradouro.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid" >
         <label>Número</label>
         <input type="text" pInputText name="numero" ngModel
           #numero="ngModel" required>
-        <!--
-          <app-message [control]="numero" error="required"
-            text="Informe um número"></app-message>
-        -->
+        <app-message [control]="numero" error="required"
+          text="Informe um número"></app-message>
       </div>
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Complemento</label>
@@ -43,43 +37,35 @@
         <label>Bairro</label>
         <input type="text" pInputText name="bairro" ngModel
           #bairro="ngModel" required minlength="5">
-        <!--
-          <app-message [control]="bairro" error="required"
-            text="Informe um bairro"></app-message>
-          <app-message [control]="bairro" error="minlength"
-            text="Minimo de {{ bairro.errors?.minlength?.requiredLength }} caracteres"></app-message>
-        -->
+        <app-message [control]="bairro" error="required"
+          text="Informe um bairro"></app-message>
+        <app-message [control]="bairro" error="minlength"
+          text="Minimo de {{ bairro.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>CEP</label>
         <p-inputMask mask="99.999-999" name="cep" ngModel
           #cep="ngModel" required></p-inputMask>
-        <!--
-          <app-message [control]="cep" error="required"
-            text="Informe um cep"></app-message>
-        -->
+        <app-message [control]="cep" error="required"
+          text="Informe um cep"></app-message>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Cidade</label>
         <input type="text" pInputText name="cidade" ngModel
           #cidade="ngModel" required minlength="5">
-        <!--
-          <app-message [control]="cidade" error="required"
-            text="Informe uma cidade"></app-message>
-          <app-message [control]="cidade" error="minlength"
-            text="Minimo de {{ cidade.errors?.minlength?.requiredLength }} caracteres"></app-message>
-        -->
+        <app-message [control]="cidade" error="required"
+          text="Informe uma cidade"></app-message>
+        <app-message [control]="cidade" error="minlength"
+          text="Minimo de {{ cidade.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Estado</label>
         <input type="text" pInputText name="estado" ngModel
           #estado="ngModel" required minlength="2">
-        <!--
-          <app-message [control]="estado" error="required"
-            text="Informe um estado"></app-message>
-          <app-message [control]="estado" error="minlength"
-            text="Minimo de {{ estado.errors?.minlength?.requiredLength }} caracteres"></app-message>
-        -->
+        <app-message [control]="estado" error="required"
+          text="Informe um estado"></app-message>
+        <app-message [control]="estado" error="minlength"
+          text="Minimo de {{ estado.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
