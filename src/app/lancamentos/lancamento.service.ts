@@ -3,12 +3,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
 
-export interface LancamentoFiltro {
+export class LancamentoFiltro {
   descricao: string;
   pessoa: string;
   categoria: string;
   dataVencimentoDe: Date;
   dataVencimentoAte: Date;
+  pagina = 0;
+  itensPorPagina = 5;
 }
 
 @Injectable({
@@ -26,16 +28,19 @@ export class LancamentoService {
     const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     let params = new HttpParams();
 
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
+
     if (filtro.descricao) {
-      params = params.append('descricao', filtro.descricao);
+      params = params.set('descricao', filtro.descricao);
     }
 
     if (filtro.pessoa) {
-      params = params.append('nomePessoa', filtro.pessoa);
+      params = params.set('nomePessoa', filtro.pessoa);
     }
 
     if (filtro.categoria) {
-      params = params.append('nomeCategoria', filtro.categoria);
+      params = params.set('nomeCategoria', filtro.categoria);
     }
 
     if (filtro.dataVencimentoDe) {
@@ -47,7 +52,17 @@ export class LancamentoService {
     }
 
     return this.http.get(`${this.lancamentoUrl}/resum`, {headers, params})
-      .toPromise();
+      .toPromise<any>()
+      .then((response) => {
+        const lancamentos = response.content;
+
+        const resultado = {
+          lancamentos,
+          total: response.totalElements
+        };
+
+        return resultado;
+      });
   }
 }
 

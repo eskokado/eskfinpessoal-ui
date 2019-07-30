@@ -8,11 +8,8 @@ import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 })
 export class LancamentosPesquisaComponent implements OnInit {
   lancamentos = [];
-  descricao: string;
-  pessoa: string;
-  categoria: string;
-  dataVencimentoDe: Date;
-  dataVencimentoAte: Date;
+
+  filtro = new LancamentoFiltro();
 
   constructor(
     private lancamentoService: LancamentoService
@@ -23,17 +20,9 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   pesquisar() {
-    const filtro: LancamentoFiltro = {
-      descricao: this.descricao,
-      pessoa: this.pessoa,
-      categoria: this.categoria,
-      dataVencimentoDe: this.dataVencimentoDe,
-      dataVencimentoAte: this.dataVencimentoAte
-    }
-
-    this.lancamentoService.pesquisar( filtro )
+    this.lancamentoService.pesquisar( this.filtro )
       .then((response) => {
-        this.lancamentos = response.content;
+        this.lancamentos = response.lancamentos;
       });
   }
 }
