@@ -20,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { MessageComponent } from './message/message.component';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MessageComponent } from './message/message.component';
     NavbarComponent,
     PessoasPesquisaComponent,
     LancamentoCadastroComponent,
-    MessageComponent
+    MessageComponent,
+    PessoaCadastroComponent
   ],
   imports: [
     BrowserModule,
