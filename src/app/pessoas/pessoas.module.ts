@@ -10,11 +10,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
 
-import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 
-import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
 @NgModule({
   imports: [
@@ -26,19 +26,15 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     TableModule,
     TooltipModule,
     InputTextareaModule,
-    CalendarModule,
-    SelectButtonModule,
-    DropdownModule,
-
-    CurrencyMaskModule
+    InputMaskModule,
   ],
   declarations: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
+    PessoaCadastroComponent,
+    PessoasPesquisaComponent,
   ],
   exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
+    PessoaCadastroComponent,
+    PessoasPesquisaComponent
   ]
 })
-export class LancamentosModule { }
+export class PessoasModule { }
