@@ -5,17 +5,29 @@
         <h1>Lançamentos</h1>
       </div>
 
-      <div class="ui-g-12">
+      <div class="ui-g-12 ui-fluid">
         <label>Descrição</label>
         <input type="text" pInputText name="descricao" [(ngModel)]="descricao">
       </div>
 
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Pessoa</label>
+          <input type="text" pInputText name="pessoa" [(ngModel)]="pessoa">
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+          <label>Categoria</label>
+          <input type="text" pInputText name="categoria" [(ngModel)]="categoria">
+      </div>
+
       <div class="ui-g-12">
         <label style="display: block;">Vencimento</label>
-        <input type="text" pInputText style="width: 95px;">
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="vencimentoDe" [(ngModel)]="dataVencimentoDe"></p-calendar>
 
         <label>Até</label>
-        <input type="text" pInputText style="width: 95px;">
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+        name="vencimentoAte" [(ngModel)]="dataVencimentoAte"></p-calendar>
       </div>
 
       <div class="ui-g-12">
