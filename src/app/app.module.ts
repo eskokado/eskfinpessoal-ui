@@ -11,8 +11,6 @@ import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 
-import { LancamentoService } from './lancamentos/lancamento.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +26,7 @@ import { LancamentoService } from './lancamentos/lancamento.service';
     LancamentosModule,
     PessoasModule
   ],
-  providers: [
-    LancamentoService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

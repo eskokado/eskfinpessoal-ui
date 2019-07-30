@@ -18,6 +18,8 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
 
 import { SharedModule } from './../shared/shared.module';
 
+import { LancamentoService } from './lancamento.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -43,6 +45,9 @@ import { SharedModule } from './../shared/shared.module';
   exports: [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent
+  ],
+  providers: [
+    LancamentoService
   ]
 })
 export class LancamentosModule { }
