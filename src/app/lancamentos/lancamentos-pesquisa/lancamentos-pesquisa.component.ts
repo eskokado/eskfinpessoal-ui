@@ -8,6 +8,7 @@ import { LancamentoService } from './../lancamento.service';
 })
 export class LancamentosPesquisaComponent implements OnInit {
   lancamentos = [];
+  descricao: string;
 
   constructor(
     private lancamentoService: LancamentoService
@@ -18,7 +19,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   pesquisar() {
-    this.lancamentoService.pesquisar()
+    this.lancamentoService.pesquisar({ descricao: this.descricao })
       .then((response) => {
         this.lancamentos = response.content;
       });
