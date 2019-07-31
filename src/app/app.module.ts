@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
 
@@ -24,6 +26,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
     HttpClientModule,
 
     ToastModule,
+    ConfirmDialogModule,
 
     CoreModule,
 
@@ -32,6 +35,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
   ],
   providers: [
     MessageService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent]
 })
