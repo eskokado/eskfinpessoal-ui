@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 
@@ -20,6 +21,8 @@ import { PessoasModule } from './pessoas/pessoas.module';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+
+    ToastModule,
 
     CoreModule,
 
