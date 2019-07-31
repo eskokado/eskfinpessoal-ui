@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+import { MessageService } from 'primeng/api';
+
+import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { LancamentoDTO } from './../../core/models';
-import { FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -28,10 +31,12 @@ export class LancamentoCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.params.id);
     this.carregarCategorias();
     this.carregarPessoas();
   }
