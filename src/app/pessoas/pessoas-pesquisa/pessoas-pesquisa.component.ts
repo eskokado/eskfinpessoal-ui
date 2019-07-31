@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PessoaService } from './../pessoa.service';
+import { PessoaService, PessoaFiltro } from './../pessoa.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -8,6 +8,8 @@ import { PessoaService } from './../pessoa.service';
 })
 export class PessoasPesquisaComponent implements OnInit {
   pessoas = [];
+
+  filtro = new PessoaFiltro();
 
   constructor(
     private pessoaService: PessoaService
@@ -18,7 +20,7 @@ export class PessoasPesquisaComponent implements OnInit {
   }
 
   pesquisar() {
-    this.pessoaService.pesquisar()
+    this.pessoaService.pesquisar(this.filtro)
       .then((response) => {
         this.pessoas = response.content;
       });

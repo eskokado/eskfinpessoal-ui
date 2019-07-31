@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+export class PessoaFiltro {
+  nome: string;
+  cidade: string;
+  estado: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +16,26 @@ export class PessoaService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  pesquisar(): Promise<any> {
+  pesquisar(filtro: PessoaFiltro): Promise<any> {
     const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
+    let params = new HttpParams();
 
-    return this.http.get(`${this.pessoasUrl}/page`, {headers})
+    if (filtro.nome) {
+      params = params.set('nome', filtro.nome);
+    }
+
+    if (filtro.cidade) {
+      params = params.set('cidade', filtro.cidade);
+    }
+
+    if (filtro.estado) {
+      params = params.set('estado', filtro.estado);
+    }
+
+    return this.http.get(`${this.pessoasUrl}/page`, {headers, params})
       .toPromise();
   }
 
