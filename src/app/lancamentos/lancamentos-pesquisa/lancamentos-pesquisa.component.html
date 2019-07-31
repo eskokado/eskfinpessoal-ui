@@ -54,7 +54,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-lancamento>
           <tr>
-            <td>{{lancamento.pessoa}}</td>
+            <td>{{lancamento.pessoa.nome}}</td>
             <td>{{lancamento.descricao}}</td>
             <td class="col-data-content">{{lancamento.dataVencimento | date:'dd/MM/y'}}</td>
             <td class="col-data-content">{{lancamento.dataPagamento | date:'dd/MM/y'}}</td>
@@ -71,7 +71,7 @@
       </p-table>
     </div>
     <div class="ui-g-12">
-      <a pButton label="Novo Lançamento"></a>
+      <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo"></a>
     </div>
   </div>
 </div>

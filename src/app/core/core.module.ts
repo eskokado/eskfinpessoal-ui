@@ -2,6 +2,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { RouterModule } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
@@ -14,6 +15,7 @@ registerLocaleData(localePt);
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
   ],
   declarations: [
     NavbarComponent
