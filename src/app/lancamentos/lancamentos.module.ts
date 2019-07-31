@@ -10,7 +10,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
-import { MessageService } from 'primeng/api';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -49,7 +48,6 @@ import { LancamentoService } from './lancamento.service';
   ],
   providers: [
     LancamentoService,
-    MessageService,
   ]
 })
 export class LancamentosModule { }
