@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
+import { LancamentoDTO } from './../core/models';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -70,6 +71,15 @@ export class LancamentoService {
     return this.http.delete(`${this.lancamentoUrl}/${id}/erro`, {headers})
       .toPromise()
       .then(() => null);
+  }
+
+  adicionar(lancamento: LancamentoDTO): Promise<LancamentoDTO> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
+    headers = headers.set('Content-Type', 'application/json');
+
+    return this.http.post(`${this.lancamentoUrl}`, lancamento, { headers })
+      .toPromise<any>();
   }
 }
 

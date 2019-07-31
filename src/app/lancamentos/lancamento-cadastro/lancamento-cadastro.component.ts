@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
+import { LancamentoDTO } from './../../core/models';
+import { FormControl } from '@angular/forms';
+import { LancamentoService } from '../lancamento.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -16,12 +20,14 @@ export class LancamentoCadastroComponent implements OnInit {
   ];
 
   categorias = [];
-
   pessoas = [];
+  lancamento = new LancamentoDTO();
 
   constructor(
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
+    private lancamentoService: LancamentoService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService
   ) { }
 
@@ -42,6 +48,16 @@ export class LancamentoCadastroComponent implements OnInit {
     this.pessoaService.listarTodas()
       .then((pessoas) => {
         this.pessoas = pessoas.map(p => ({ label: p.nome, value: p.id }));
+      })
+      .catch(error => this.errorHandler.handle(error));
+  }
+
+  salvar(form: FormControl) {
+    this.lancamentoService.adicionar(this.lancamento)
+      .then((response) => {
+        this.messageService.add({severity: 'success', summary: 'Inclusão de lançamento', detail: 'Lançamento incluído com sucesso!'});
+        form.reset();
+        this.lancamento = new LancamentoDTO();
       })
       .catch(error => this.errorHandler.handle(error));
   }
