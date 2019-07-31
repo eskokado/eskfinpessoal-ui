@@ -5,6 +5,8 @@ export class PessoaFiltro {
   nome: string;
   cidade: string;
   estado: string;
+  pagina = 0;
+  itensPorPagina = 5;
 }
 
 @Injectable({
@@ -23,6 +25,9 @@ export class PessoaService {
     const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     let params = new HttpParams();
 
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
+
     if (filtro.nome) {
       params = params.set('nome', filtro.nome);
     }
@@ -36,7 +41,17 @@ export class PessoaService {
     }
 
     return this.http.get(`${this.pessoasUrl}/page`, {headers, params})
-      .toPromise();
+      .toPromise<any>()
+      .then((response) => {
+        const pessoas = response.content;
+
+        const resultado = {
+          pessoas,
+          total: response.totalElements
+        };
+
+        return resultado;
+      });
   }
 
   listarTodas(): Promise<any> {

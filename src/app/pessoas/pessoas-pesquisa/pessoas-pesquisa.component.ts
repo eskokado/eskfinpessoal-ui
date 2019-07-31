@@ -22,7 +22,7 @@ export class PessoasPesquisaComponent implements OnInit {
   pesquisar() {
     this.pessoaService.pesquisar(this.filtro)
       .then((response) => {
-        this.pessoas = response.content;
+        this.pessoas = response.pessoas;
       });
   }
 }
