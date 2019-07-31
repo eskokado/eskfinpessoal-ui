@@ -14,6 +14,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
+import { PessoaService } from './pessoa.service';
 
 import { SharedModule } from './../shared/shared.module';
 
@@ -38,6 +39,9 @@ import { SharedModule } from './../shared/shared.module';
   exports: [
     PessoaCadastroComponent,
     PessoasPesquisaComponent
+  ],
+  providers: [
+    PessoaService
   ]
 })
 export class PessoasModule { }
