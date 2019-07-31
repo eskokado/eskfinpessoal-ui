@@ -51,7 +51,7 @@ export class LancamentoService {
       params = params.append('dataVencimentoAte', moment(filtro.dataVencimentoAte).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(`${this.lancamentoUrl}/resum`, {headers, params})
+    return this.http.get(`${this.lancamentoUrl}/page`, {headers, params})
       .toPromise<any>()
       .then((response) => {
         const lancamentos = response.content;
