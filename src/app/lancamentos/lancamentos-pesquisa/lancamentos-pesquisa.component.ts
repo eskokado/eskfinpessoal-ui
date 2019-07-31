@@ -4,6 +4,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private errorHandler: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,8 @@ export class LancamentosPesquisaComponent implements OnInit {
       .then((response) => {
         this.totalRegistros = response.total;
         this.lancamentos = response.lancamentos;
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
@@ -57,6 +60,7 @@ export class LancamentosPesquisaComponent implements OnInit {
       .then(() => {
         this.grid.reset();
         this.messageService.add({severity: 'success', summary: 'Excluido lançamento', detail: 'Lançamento excluído com sucesso!'});
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 }
