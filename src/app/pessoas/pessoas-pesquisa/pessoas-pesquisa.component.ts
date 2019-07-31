@@ -61,4 +61,16 @@ export class PessoasPesquisaComponent implements OnInit {
       })
       .catch(error => this.errorHandler.handle(error));
   }
+
+  alterarStatus(pessoa: any) {
+    const novoStatus = !pessoa.ativo;
+
+    this.pessoaService.mudarStatus(pessoa.id, novoStatus)
+      .then(() => {
+        const acao = novoStatus ? 'ativada' : 'desativada';
+        pessoa.ativo = novoStatus;
+        this.messageService.add({severity: 'success', summary: 'Ativar ou Desativar pessoa', detail: `Pessoa foi ${acao} com sucesso!`});
+      })
+      .catch(error => this.errorHandler.handle(error));
+  }
 }
