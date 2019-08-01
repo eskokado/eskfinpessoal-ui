@@ -4,6 +4,7 @@ import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api'
 
 import { PessoaService, PessoaFiltro } from './../pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -22,11 +23,13 @@ export class PessoasPesquisaComponent implements OnInit {
     private pessoaService: PessoaService,
     private messageService: MessageService,
     private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private title: Title
   ) {}
 
   ngOnInit() {
     //this.pesquisar();
+    this.title.setTitle('Pesquisa de pessoa');
   }
 
   pesquisar(pagina = 0) {

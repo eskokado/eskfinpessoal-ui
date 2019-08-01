@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { MessageService } from 'primeng/api';
 
@@ -22,10 +23,12 @@ export class PessoaCadastroComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Nova pessoa');
     const idPessoa = this.route.snapshot.params.id;
     if (idPessoa) {
       this.carregarPessoa(idPessoa);
@@ -40,6 +43,7 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.buscarPorId(id)
       .then((response) => {
         this.pessoa = response;
+        this.atualizarTituloEdicao();
       })
       .catch(error => this.errorHandler.handle(error));
   }
@@ -65,6 +69,7 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.atualizar(this.pessoa)
       .then((response) => {
         this.pessoa = response;
+        this.atualizarTituloEdicao();
         this.messageService.add({severity: 'success', summary: 'Atualização de pessoa', detail: 'Pessoa atualizada com sucesso!'});
       })
       .catch(error => this.errorHandler.handle(error));
@@ -78,6 +83,10 @@ export class PessoaCadastroComponent implements OnInit {
     }, 1);
 
     this.router.navigate(['/pessoas/nova']);
+  }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`);
   }
 
 }
