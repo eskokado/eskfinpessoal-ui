@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
-import { PesssoaDTO } from 'src/app/core/models';
+import { PessoaDTO } from 'src/app/core/models';
 import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 
@@ -15,7 +15,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 })
 export class PessoaCadastroComponent implements OnInit {
 
-  pessoa = new PesssoaDTO();
+  pessoa = new PessoaDTO();
 
   constructor(
     private pessoaService: PessoaService,
@@ -33,7 +33,7 @@ export class PessoaCadastroComponent implements OnInit {
       .then((response) => {
         this.messageService.add({severity: 'success', summary: 'Inclusão de pessoa', detail: 'Pessoa adicionada com sucesso!'});
         form.reset();
-        this.pessoa = new PesssoaDTO();
+        this.pessoa = new PessoaDTO();
       })
       .catch(error => this.errorHandler.handle(error));
   }

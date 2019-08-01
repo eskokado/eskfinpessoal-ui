@@ -78,8 +78,8 @@ export class LancamentoService {
     headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post(`${this.lancamentoUrl}`, lancamento, { headers })
-      .toPromise<any>();
+    return this.http.post<LancamentoDTO>(`${this.lancamentoUrl}`, lancamento, { headers })
+      .toPromise();
   }
 
   atualizar(lancamento: LancamentoDTO): Promise<LancamentoDTO> {
@@ -87,8 +87,8 @@ export class LancamentoService {
     headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.put(`${this.lancamentoUrl}/${lancamento.id}`, lancamento, { headers })
-      .toPromise<any>()
+    return this.http.put<LancamentoDTO>(`${this.lancamentoUrl}/${lancamento.id}`, lancamento, { headers })
+      .toPromise()
       .then((response) => {
         const lancamentoAlterado = response;
 
@@ -101,8 +101,8 @@ export class LancamentoService {
   buscaPorId(id: number): Promise<LancamentoDTO> {
     const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
 
-    return this.http.get(`${this.lancamentoUrl}/${id}`, { headers })
-      .toPromise<any>()
+    return this.http.get<LancamentoDTO>(`${this.lancamentoUrl}/${id}`, { headers })
+      .toPromise()
       .then((response) => {
         const lancamento = response;
 

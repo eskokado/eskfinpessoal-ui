@@ -28,7 +28,7 @@ export class Endereco {
   estado: string;
 }
 
-export class PesssoaDTO {
+export class PessoaDTO {
   nome: string;
   ativo = true;
   endereco = new Endereco();
