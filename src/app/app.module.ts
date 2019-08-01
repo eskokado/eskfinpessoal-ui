@@ -25,8 +25,6 @@ import { PessoasModule } from './pessoas/pessoas.module';
     FormsModule,
     HttpClientModule,
 
-    AppRoutingModule,
-
     ToastModule,
     ConfirmDialogModule,
 
@@ -34,6 +32,8 @@ import { PessoasModule } from './pessoas/pessoas.module';
 
     LancamentosModule,
     PessoasModule,
+
+    AppRoutingModule,
   ],
   providers: [
   ],

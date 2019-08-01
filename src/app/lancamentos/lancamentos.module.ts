@@ -19,7 +19,7 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
 
 import { SharedModule } from './../shared/shared.module';
 
-import { LancamentoService } from './lancamento.service';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 @NgModule({
   imports: [
@@ -38,7 +38,9 @@ import { LancamentoService } from './lancamento.service';
 
     CurrencyMaskModule,
 
-    SharedModule
+    SharedModule,
+
+    LancamentosRoutingModule
   ],
   declarations: [
     LancamentoCadastroComponent,
