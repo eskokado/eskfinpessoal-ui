@@ -1,4 +1,4 @@
-export class Pesssoa {
+export class Pessoa {
   id: number;
 }
 
@@ -14,7 +14,7 @@ export class LancamentoDTO {
   dataPagamento: Date;
   valor: number;
   observacao: string;
-  pessoa = new Pesssoa();
+  pessoa = new Pessoa();
   categoria = new Categoria();
 }
 
@@ -29,6 +29,7 @@ export class Endereco {
 }
 
 export class PessoaDTO {
+  id: number;
   nome: string;
   ativo = true;
   endereco = new Endereco();

@@ -25,7 +25,22 @@ export class PessoaCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params.id);
+    const idPessoa = this.route.snapshot.params.id;
+    if (idPessoa) {
+      this.carregarPessoa(idPessoa);
+    }
+  }
+
+  get editando() {
+    return Boolean(this.pessoa.id);
+  }
+
+  carregarPessoa(id: number) {
+    this.pessoaService.buscarPorId(id)
+      .then((response) => {
+        this.pessoa = response;
+      })
+      .catch(error => this.errorHandler.handle(error));
   }
 
   salvar(form: FormControl) {
