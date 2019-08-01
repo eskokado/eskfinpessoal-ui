@@ -14,6 +14,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { CategoriaService } from './../categorias/categoria.service';
+import { AuthService } from './../seguranca/auth.service';
 
 registerLocaleData(localePt);
 
@@ -33,6 +34,7 @@ registerLocaleData(localePt);
     LancamentoService,
     PessoaService,
     CategoriaService,
+    AuthService,
 
     Title,
 
