@@ -62,11 +62,28 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
-      .then((response) => {
+      .then(() => {
         this.messageService.add({severity: 'success', summary: 'Inclusão de lançamento', detail: 'Lançamento incluído com sucesso!'});
         form.reset();
         this.lancamento = new LancamentoDTO();
+      })
+      .catch(error => this.errorHandler.handle(error));
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.lancamentoService.atualizar(this.lancamento)
+      .then((response) => {
+        this.lancamento = response;
+        this.messageService.add({severity: 'success', summary: 'Edição de lançamento', detail: 'Lançamento atualizado com sucesso!'});
       })
       .catch(error => this.errorHandler.handle(error));
   }
