@@ -26,7 +26,6 @@ export class LancamentoService {
   ) { }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -52,7 +51,7 @@ export class LancamentoService {
       params = params.append('dataVencimentoAte', moment(filtro.dataVencimentoAte).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(`${this.lancamentoUrl}/page`, {headers, params})
+    return this.http.get(`${this.lancamentoUrl}/page`, {params})
       .toPromise<any>()
       .then((response) => {
         const lancamentos = response.content;
@@ -67,24 +66,21 @@ export class LancamentoService {
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
-    return this.http.delete(`${this.lancamentoUrl}/${id}/erro`, {headers})
+    return this.http.delete(`${this.lancamentoUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   adicionar(lancamento: LancamentoDTO): Promise<LancamentoDTO> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post<LancamentoDTO>(`${this.lancamentoUrl}`, lancamento, { headers })
+    return this.http.post<LancamentoDTO>(`${this.lancamentoUrl}`, lancamento)
       .toPromise();
   }
 
   atualizar(lancamento: LancamentoDTO): Promise<LancamentoDTO> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
     return this.http.put<LancamentoDTO>(`${this.lancamentoUrl}/${lancamento.id}`, lancamento, { headers })
@@ -99,9 +95,7 @@ export class LancamentoService {
   }
 
   buscaPorId(id: number): Promise<LancamentoDTO> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
-
-    return this.http.get<LancamentoDTO>(`${this.lancamentoUrl}/${id}`, { headers })
+    return this.http.get<LancamentoDTO>(`${this.lancamentoUrl}/${id}`)
       .toPromise()
       .then((response) => {
         const lancamento = response;

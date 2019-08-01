@@ -24,7 +24,6 @@ export class PessoaService {
   }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('page', filtro.pagina.toString());
@@ -42,7 +41,7 @@ export class PessoaService {
       params = params.set('estado', filtro.estado);
     }
 
-    return this.http.get(`${this.pessoasUrl}/page`, {headers, params})
+    return this.http.get(`${this.pessoasUrl}/page`, {params})
       .toPromise<any>()
       .then((response) => {
         const pessoas = response.content;
@@ -57,21 +56,18 @@ export class PessoaService {
   }
 
   listarTodas(): Promise<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
-    return this.http.get(`${this.pessoasUrl}/search`, {headers})
+    return this.http.get(`${this.pessoasUrl}/search`)
       .toPromise();
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
-    return this.http.delete(`${this.pessoasUrl}/${id}`, { headers })
+    return this.http.delete(`${this.pessoasUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   mudarStatus(id: number, ativo: boolean): Promise<void> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
     return this.http.put(`${this.pessoasUrl}/${id}/ativo`, ativo, { headers })
@@ -81,7 +77,6 @@ export class PessoaService {
 
   adicionar(pessoa: PessoaDTO): Promise<PessoaDTO> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
     return this.http.post<PessoaDTO>(`${this.pessoasUrl}`, pessoa, { headers })
@@ -90,7 +85,6 @@ export class PessoaService {
 
   atualizar(pessoa: PessoaDTO): Promise<PessoaDTO> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
     headers = headers.set('Content-Type', 'application/json');
 
     return this.http.put<PessoaDTO>(`${this.pessoasUrl}/${pessoa.id}`, pessoa, { headers })
@@ -99,9 +93,7 @@ export class PessoaService {
   }
 
   buscarPorId(id: number): Promise<PessoaDTO> {
-    const headers = new HttpHeaders().set('Authorization', 'Basic YWRtaW5AZXNraW5mb3RlY2h3ZWIuY29tOmFkbWlu');
-
-    return this.http.get<PessoaDTO>(`${this.pessoasUrl}/${id}`, { headers })
+    return this.http.get<PessoaDTO>(`${this.pessoasUrl}/${id}`)
       .toPromise();
   }
 
