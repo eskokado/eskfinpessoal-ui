@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
 
     LancamentosModule,
     PessoasModule,
+    SegurancaModule,
 
     AppRoutingModule,
   ],
