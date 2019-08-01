@@ -70,7 +70,8 @@
       </div>
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-warning" ></button>
+        <button pButton type="button" label="Novo" class="ui-button-warning"
+          (click)="novo(f)"></button>
         <a routerLink="/pessoas"  >Voltar para a pesquisa</a>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
@@ -21,7 +21,8 @@ export class PessoaCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -55,8 +56,7 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.adicionar(this.pessoa)
       .then((response) => {
         this.messageService.add({severity: 'success', summary: 'Inclusão de pessoa', detail: 'Pessoa adicionada com sucesso!'});
-        form.reset();
-        this.pessoa = new PessoaDTO();
+        this.router.navigate(['/pessoas', response.id]);
       })
       .catch(error => this.errorHandler.handle(error));
   }
@@ -68,6 +68,16 @@ export class PessoaCadastroComponent implements OnInit {
         this.messageService.add({severity: 'success', summary: 'Atualização de pessoa', detail: 'Pessoa atualizada com sucesso!'});
       })
       .catch(error => this.errorHandler.handle(error));
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+
+    setTimeout(() => {
+      this.pessoa = new PessoaDTO();
+    }, 1);
+
+    this.router.navigate(['/pessoas/nova']);
   }
 
 }
