@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { MessageService } from 'primeng/api';
 
@@ -33,11 +34,13 @@ export class LancamentoCadastroComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
     const idlancamento = this.route.snapshot.params.id;
+    this.title.setTitle('Novo lançamento');
 
     if (idlancamento) {
       this.carregarLancamento(idlancamento);
@@ -74,7 +77,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.adicionar(this.lancamento)
       .then((lancamento) => {
         this.messageService.add({severity: 'success', summary: 'Inclusão de lançamento', detail: 'Lançamento incluído com sucesso!'});
-        this.router.navigate(['/lancamentos', lancamento.id])
+        this.router.navigate(['/lancamentos', lancamento.id]);
       })
       .catch(error => this.errorHandler.handle(error));
   }
@@ -83,6 +86,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.lancamento)
       .then((response) => {
         this.lancamento = response;
+        this.atualizarTituloEdicao();
         this.messageService.add({severity: 'success', summary: 'Edição de lançamento', detail: 'Lançamento atualizado com sucesso!'});
       })
       .catch(error => this.errorHandler.handle(error));
@@ -96,6 +100,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.buscaPorId(id)
       .then((response) => {
         this.lancamento = response;
+        this.atualizarTituloEdicao();
       })
       .catch(error => this.errorHandler.handle(error));
   }
@@ -108,4 +113,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.router.navigate(['/lancamentos/novo']);
   }
 
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
+  }
 }
