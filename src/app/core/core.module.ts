@@ -8,6 +8,8 @@ import { Title } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 //import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
@@ -38,6 +40,7 @@ registerLocaleData(localePt);
 
     Title,
 
+    JwtHelperService,
     MessageService,
     ConfirmationService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
