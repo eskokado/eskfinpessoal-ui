@@ -44,11 +44,28 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizandoPessoa(form);
+    } else {
+      this.adicionandoPessoa(form);
+    }
+  }
+
+  adicionandoPessoa(form: FormControl) {
     this.pessoaService.adicionar(this.pessoa)
       .then((response) => {
         this.messageService.add({severity: 'success', summary: 'Inclusão de pessoa', detail: 'Pessoa adicionada com sucesso!'});
         form.reset();
         this.pessoa = new PessoaDTO();
+      })
+      .catch(error => this.errorHandler.handle(error));
+  }
+
+  atualizandoPessoa(form: FormControl) {
+    this.pessoaService.atualizar(this.pessoa)
+      .then((response) => {
+        this.pessoa = response;
+        this.messageService.add({severity: 'success', summary: 'Atualização de pessoa', detail: 'Pessoa atualizada com sucesso!'});
       })
       .catch(error => this.errorHandler.handle(error));
   }
