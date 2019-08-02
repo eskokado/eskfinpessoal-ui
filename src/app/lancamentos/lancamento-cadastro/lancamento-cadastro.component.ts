@@ -89,7 +89,10 @@ export class LancamentoCadastroComponent implements OnInit {
         this.atualizarTituloEdicao();
         this.messageService.add({severity: 'success', summary: 'Edição de lançamento', detail: 'Lançamento atualizado com sucesso!'});
       })
-      .catch(error => this.errorHandler.handle(error));
+      .catch(error => {
+        console.log(error);
+        this.errorHandler.handle(error)
+      });
   }
 
   get editando() {

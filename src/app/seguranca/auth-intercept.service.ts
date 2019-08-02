@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
+import { ErrorHandlerService } from '../core/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { AuthService } from './auth.service';
 export class AuthInterceptService {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private errorHandler: ErrorHandlerService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -34,6 +36,8 @@ export class AuthInterceptService {
               return next.handle(req);
             })
           );
+        } else {
+          this.errorHandler.handle(error);
         }
       })
     );

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { MessageService } from 'primeng/api';
 
@@ -15,14 +16,24 @@ export class ErrorHandlerService {
     let msg: string;
     let titulo: string;
 
-    console.log(errorResponse);
+    console.log('Error handler: ', errorResponse);
 
     if (typeof errorResponse === 'string') {
       titulo = 'Mensagem de Erro';
       msg = errorResponse;
-    } else if (errorResponse.status === 404) {
-      titulo = errorResponse.error.error;
-      msg = `(${errorResponse.status}) - ${errorResponse.error.message}`;
+    } else if (errorResponse instanceof HttpErrorResponse &&
+      errorResponse.status >= 400 &&
+      errorResponse.status <= 499) {
+        if (errorResponse.status === 404) {
+          titulo = errorResponse.error.error;
+          msg = `(${errorResponse.status}) - ${errorResponse.error.message}`;
+        } else if (errorResponse.status === 403) {
+          titulo = errorResponse.error.error;
+          msg = 'Você não tem permissão para executar esta ação';
+        } else {
+          titulo = 'Mensagem de Erro';
+          msg = 'Erro ao processar serviço remoto. Tente novamente.';
+        }
     } else {
       titulo = 'Mensagem de Erro';
       msg = 'Erro ao processar serviço remoto. Tente novamente.';

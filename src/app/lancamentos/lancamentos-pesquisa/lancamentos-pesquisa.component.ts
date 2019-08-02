@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { AuthService } from 'src/app/seguranca/auth.service';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class LancamentosPesquisaComponent implements OnInit {
     private messageService: MessageService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {

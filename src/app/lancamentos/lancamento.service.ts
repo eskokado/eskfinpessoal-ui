@@ -91,7 +91,7 @@ export class LancamentoService {
         this.converterStringsParaDatas([lancamentoAlterado]);
 
         return lancamentoAlterado;
-    });
+      });
   }
 
   buscaPorId(id: number): Promise<LancamentoDTO> {
