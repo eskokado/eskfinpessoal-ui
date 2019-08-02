@@ -52,6 +52,11 @@ export class AuthService {
     }
   }
 
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
+  }
+
   isAccessTokenInvalido() {
     const jwtHelper = new JwtHelperService();
     const token = localStorage.getItem('token');
