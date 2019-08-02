@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
@@ -9,7 +10,8 @@ import { MessageService } from 'primeng/api';
 export class ErrorHandlerService {
 
   constructor(
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) { }
 
   handle(errorResponse: any) {
@@ -21,6 +23,12 @@ export class ErrorHandlerService {
     if (typeof errorResponse === 'string') {
       titulo = 'Mensagem de Erro';
       msg = errorResponse;
+    } else if (errorResponse instanceof HttpErrorResponse &&
+      errorResponse.status === 401 &&
+      errorResponse.error.error === 'invalid_token') {
+        titulo = errorResponse.error.error;
+        msg = 'Sua Sessão expirou';
+        this.router.navigate(['/login']);
     } else if (errorResponse instanceof HttpErrorResponse &&
       errorResponse.status >= 400 &&
       errorResponse.status <= 499) {
