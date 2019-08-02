@@ -74,6 +74,7 @@ export class AuthService {
     return this.http.post<any>(this.oauthTokenUrl, null, { headers, params, withCredentials: true })
       .pipe(
         map(token => {
+          console.log('Refresh token com sucesso!');
           this.armazenarToken(token.access_token);
           return token.access_token;
         })
