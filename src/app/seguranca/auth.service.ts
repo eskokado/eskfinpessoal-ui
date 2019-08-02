@@ -75,6 +75,26 @@ export class AuthService {
       );
   }
 
+  obterNovoAccessToken(): Promise<void> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', 'Basic ZXNraW5mb3RlY2h3ZWI6M3NrMW5mMHQzY2h3M2Iw');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post<any>(this.oauthTokenUrl, body, { headers, withCredentials: true })
+      .toPromise()
+      .then(response => {
+        this.armazenarToken(response.access_token);
+        console.log('Novo access token criado!');
+        return Promise.resolve(null);
+      })
+      .catch(response => {
+        console.log('Erro ao renovar token ', response);
+        return Promise.resolve(null);
+      });
+  }
+
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
