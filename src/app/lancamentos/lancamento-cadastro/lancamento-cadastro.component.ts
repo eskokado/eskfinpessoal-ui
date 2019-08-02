@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -58,7 +58,7 @@ export class LancamentoCadastroComponent implements OnInit {
       tipo: [ 'DESPESA' , Validators.required ],
       dataVencimento: [ null, Validators.required ],
       dataPagamento: [],
-      descricao: [ null, [Validators.required, Validators.minLength(5)] ],
+      descricao: [ null, [this.validarObrigatoriedade, this.validarTamanhoMinimo(5)] ],
       valor: [ null, Validators.required ],
       pessoa: this.formBuilder.group({
         id: [ null, Validators.required ],
@@ -70,6 +70,16 @@ export class LancamentoCadastroComponent implements OnInit {
       }),
       observacao: []
     });
+  }
+
+  validarObrigatoriedade(input: FormControl) {
+    return (input.value ? null : { obrigatoriedade: true });
+  }
+
+  validarTamanhoMinimo(valor: number) {
+    return ( input: FormControl ) => {
+      return ( !input.value || input.value.length >= valor ) ? null : { tamanhoMinimo: { tamanho: valor } };
+    };
   }
 
   carregarCategorias() {
