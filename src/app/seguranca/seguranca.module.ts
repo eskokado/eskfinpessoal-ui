@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
+import { AuthGuard } from './auth.guard';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 
@@ -12,7 +13,7 @@ import { SegurancaRoutingModule } from './seguranca-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule,
 
     InputTextModule,
@@ -22,6 +23,9 @@ import { SegurancaRoutingModule } from './seguranca-routing.module';
   ],
   declarations: [
     LoginFormComponent
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class SegurancaModule { }

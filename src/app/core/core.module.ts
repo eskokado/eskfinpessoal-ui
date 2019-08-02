@@ -17,6 +17,7 @@ import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { CategoriaService } from './../categorias/categoria.service';
 import { AuthService } from './../seguranca/auth.service';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
 registerLocaleData(localePt);
 
@@ -27,7 +28,8 @@ registerLocaleData(localePt);
   ],
   declarations: [
     NavbarComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
   ],
   exports: [
     NavbarComponent
