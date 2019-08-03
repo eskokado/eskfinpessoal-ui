@@ -9,21 +9,7 @@ import { DashboardService } from '../dashboard.service';
 export class DashboardComponent implements OnInit {
 
   pieChartData: any;
-  lineChartData ={
-    labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    datasets: [
-      {
-        label: 'Receitas',
-        data: [4, 10, 18, 5, 1, 20, 3],
-        borderColor: '#3366CC'
-      },
-      {
-        label: 'Despesas',
-        data: [10, 15, 8, 5, 1, 7, 9],
-        borderColor: '#D62B00'
-      }
-    ]
-  };
+  lineChartData: any;
 
   constructor(
     private dashboardService: DashboardService
@@ -31,6 +17,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.configurarGraficoPizza();
+    this.configurarGraficoLinha();
   }
 
   configurarGraficoPizza() {
@@ -48,6 +35,52 @@ export class DashboardComponent implements OnInit {
         };
 
       });
+  }
+
+  configurarGraficoLinha() {
+    this.dashboardService.lancamentosPorDiaTipo()
+      .then(dados => {
+        const meses = this.configurarMeses();
+        const totaisReceitas = this.totaisPorMes(dados.filter(dado => dado.tipo === 'RECEITA'), meses);
+        const totaisDespesas = this.totaisPorMes(dados.filter(dado => dado.tipo === 'DESPESA'), meses);
+        this.lineChartData ={
+          labels: meses,
+          datasets: [
+            {
+              label: 'Receitas',
+              data: totaisReceitas,
+              borderColor: '#3366CC'
+            },
+            {
+              label: 'Despesas',
+              data: totaisDespesas,
+              borderColor: '#D62B00'
+            }
+          ]
+        };
+      });
+  }
+
+  private totaisPorMes(dados, meses) {
+    const totais: number[] = [];
+    for (const mes of meses) {
+      let total = 0;
+      for (const dado of dados) {
+        if (dado.dia.getMonth() === mes) {
+          total += dado.total;
+        }
+      }
+      totais.push(total);
+    }
+    return totais;
+  }
+
+  private configurarMeses() {
+    const meses: number[] = [];
+    for (let i = 1; i <= 12; i++) {
+      meses.push(i);
+    }
+    return meses;
   }
 
 }
