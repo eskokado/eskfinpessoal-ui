@@ -3,15 +3,20 @@
     <div class="ui-g-12">
       <h1>Dashboard</h1>
     </div>
-    <div class="ui-g-12 ui-md-6">
+    <div class="ui-g-12 ui-md-4">
       <p-panel header="Lançamentos por categoria">
         <p-chart type="pie" [data]="pieChartData"></p-chart>
-      </p-panel>]
+      </p-panel>
     </div>
-    <div class="ui-g-12 ui-md-6">
+    <div class="ui-g-12 ui-md-4">
       <p-panel header="Lançamentos por mês">
         <p-chart type="line" [data]="lineChartData"></p-chart>
-      </p-panel>]
+      </p-panel>
+    </div>
+    <div class="ui-g-12 ui-md-4">
+      <p-panel header="Lançamentos por Categoria">
+        <p-chart type="bar" [data]="barChartData"></p-chart>
+      </p-panel>
     </div>
   </div>
 </div>
