@@ -14,29 +14,12 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService
-  ) {
-    this.barChartData = {
-      labels: ['Impostos', 'Lazer', 'Supermercado', 'Farmácia', 'Alimentação', 'Viagens', 'Outros'],
-      datasets: [
-          {
-              label: 'Receitas',
-              backgroundColor: '#42A5F5',
-              borderColor: '#1E88E5',
-              data: [65, 59, 80, 81, 56, 55, 40]
-          },
-          {
-              label: 'Despesas',
-              backgroundColor: '#9CCC65',
-              borderColor: '#7CB342',
-              data: [28, 48, 40, 19, 86, 27, 90]
-          }
-      ]
-    }
-   }
+  ) { }
 
   ngOnInit() {
     this.configurarGraficoPizza();
     this.configurarGraficoLinha();
+    this.configurarGraficoBarra();
   }
 
   configurarGraficoPizza() {
@@ -62,7 +45,7 @@ export class DashboardComponent implements OnInit {
         const meses = this.configurarMeses();
         const totaisReceitas = this.totaisPorMes(dados.filter(dado => dado.tipo === 'RECEITA'), meses);
         const totaisDespesas = this.totaisPorMes(dados.filter(dado => dado.tipo === 'DESPESA'), meses);
-        this.lineChartData ={
+        this.lineChartData = {
           labels: meses,
           datasets: [
             {
@@ -79,6 +62,33 @@ export class DashboardComponent implements OnInit {
         };
       });
   }
+
+  configurarGraficoBarra() {
+    this.dashboardService.lancamentosPorCategoriaTipo()
+      .then(dados => {
+        const categorias = this.configurarCategorias(dados);
+        const totaisReceitas = this.totaisPorCategoria(dados.filter(dado => dado.tipo === 'RECEITA'), categorias);
+        const totaisDespesas = this.totaisPorCategoria(dados.filter(dado => dado.tipo === 'DESPESA'), categorias);
+        this.barChartData = {
+          labels: categorias,
+          datasets: [
+            {
+              label: 'Receitas',
+              backgroundColor: '#42A5F5',
+              borderColor: '#1E88E5',
+              data: totaisReceitas
+            },
+            {
+                label: 'Despesas',
+                backgroundColor: '#9CCC65',
+                borderColor: '#7CB342',
+                data: totaisDespesas
+            }
+          ]
+        };
+      });
+  }
+
 
   private totaisPorMes(dados, meses) {
     const totais: number[] = [];
@@ -102,4 +112,27 @@ export class DashboardComponent implements OnInit {
     return meses;
   }
 
+  private totaisPorCategoria(dados, categorias) {
+    const totais: number[] = [];
+    for (const categoria of categorias) {
+      let total = 0;
+      for (const dado of dados) {
+        if (dado.categoria.nome === categoria) {
+          total += dado.total;
+        }
+      }
+      totais.push(total);
+    }
+    return totais;
+  }
+
+  private configurarCategorias(dados) {
+    const categorias: string[] = [];
+    for (const dado of dados) {
+      if (categorias.indexOf(dado.categoria.nome) === -1) {
+        categorias.push(dado.categoria.nome);
+      }
+    }
+    return categorias;
+  }
 }
